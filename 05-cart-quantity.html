@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      Cart Quantity
-    </title>
+    <title>Cart Quantity</title>
+  </head>
 
-    <button onclick="console.log(`Cart Quantity: ${CartQuantity}`);">
-      Show Quantity
-    </button>
+  <body>
 
-    <button onclick="CartQuantity = CartQuantity + 1; console.log(`Cart Quantity: ${CartQuantity}`);">
-      Add to Cart
-    </button>
+    <h2>Cart Quantity: <span id="quantity">0</span></h2>
 
-    <button onclick="CartQuantity = CartQuantity + 2; console.log(`Cart Quantity: ${CartQuantity}`);">
-      +2
-    </button>
-
-    <button onclick="CartQuantity = CartQuantity + 3; console.log(`Cart Quantity: ${CartQuantity}`);">
-      +3
-    </button>
-
-    <button onclick="CartQuantity = 0; console.log('cart was reset.'); console.log(`Cart Quantity: ${CartQuantity}`);">
-      Reset Cart
-    </button>
+    <button onclick="updateCart(1)">+1</button>
+    <button onclick="updateCart(2)">+2</button>
+    <button onclick="updateCart(-1)">-1</button>
+    <button onclick="resetCart()">Reset</button>
 
     <script>
       let CartQuantity = 0;
 
-      
-      </script>
+      function updateCart(value) {
+        CartQuantity += value;
 
-    
-  </head>
+        // prevent negative values
+        if (CartQuantity < 0) {
+          CartQuantity = 0;
+        }
+
+        updateDisplay();
+      }
+
+      function resetCart() {
+        CartQuantity = 0;
+        updateDisplay();
+      }
+
+      function updateDisplay() {
+        document.getElementById("quantity").innerText = CartQuantity;
+      }
+    </script>
+
+  </body>
 </html>
